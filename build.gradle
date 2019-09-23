@@ -1,0 +1,50 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'io.quarkus:quarkus-gradle-plugin:0.22.0'
+    }
+}
+
+plugins {
+    id 'java'
+}
+
+apply plugin: 'io.quarkus'
+
+group 'org.acme'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation group: 'io.quarkus', name: 'quarkus-junit5', version: '0.22.0'
+    testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '4.1.1'
+    testImplementation 'org.apache.maven.plugins:maven-surefire-plugin:2.22.1'
+
+    implementation enforcedPlatform('io.quarkus:quarkus-bom:0.22.0')
+    implementation 'io.quarkus:quarkus-resteasy'
+    implementation group: 'io.quarkus', name: 'quarkus-resteasy-jackson', version: '0.22.0'
+    implementation group: 'com.google.guava', name: 'guava', version: '28.1-jre'
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
+    implementation group: 'commons-io', name: 'commons-io', version: '2.6'
+    implementation group: 'io.quarkus', name: 'quarkus-jdbc-postgresql', version: '0.22.0'
+    implementation group: 'io.quarkus', name: 'quarkus-hibernate-orm-panache', version: '0.22.0'
+    implementation group: 'io.quarkus', name: 'quarkus-flyway', version: '0.19.1'
+    implementation group: 'io.quarkus', name: 'quarkus-smallrye-fault-tolerance', version: '0.22.0'
+    implementation group: 'io.quarkus', name: 'quarkus-smallrye-health', version: '0.22.0'
+    implementation group: 'io.quarkus', name: 'quarkus-smallrye-openapi', version: '0.22.0'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+buildNative {
+    enableHttpUrlHandler = true
+}
